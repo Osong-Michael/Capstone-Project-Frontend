@@ -1,9 +1,20 @@
+.mobile {
+	background: url('./images/phone-bg.png');
+	background-repeat: no-repeat;
+	background-position-x: center;
+	height: 600px;
+	background-size: contain;
+}
+
 .App {
-	height: 100%;
-	width: 100%;
-	background: linear-gradient(
-		0deg,
-		rgba(255, 245, 245, 0.011642156862745057) 0%,
-		rgba(250, 250, 250, 0.25253851540616246) 99%
-	);
+	width: 240px;
+	background-image: url('./images/bg-1.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	left: 41.2%;
+	top: 10%;
+	height: 480px;
+	box-sizing: border-box;
+	overflow: hidden;
 }
