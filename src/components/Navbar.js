@@ -23,10 +23,10 @@ const Navbar = () => {
           </div>
           <ul className={click ? 'nav-options active' : 'nav-options'}>
             <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
-              <Link to="/" className="sign-up">Log In</Link>
+              <Link to="/login" className="sign-up">Log In</Link>
             </li>
             <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
-              <Link to="/" className="sign-up">
+              <Link to="/signup" className="sign-up">
                 Sign Up
               </Link>
             </li>
