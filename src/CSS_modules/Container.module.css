@@ -63,3 +63,39 @@
 	border-radius: 10px;
 	width: 100%;
 }
+
+.shoes {
+	/* border: 1px solid blue; */
+	width: 100%;
+	padding: 8px;
+	text-align: center;
+	color: white;
+	height: 350px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+}
+
+.shoes p {
+	/* border: 2px solid green; */
+	margin-top: -3px;
+}
+
+.shoes::-webkit-scrollbar {
+	display: none;
+}
+
+.shoes {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.img {
+	/* border: 1px solid red; */
+	width: 100%;
+	height: 145px;
+}
+
+.img img {
+	width: 100%;
+	padding-right: 90px;
+}

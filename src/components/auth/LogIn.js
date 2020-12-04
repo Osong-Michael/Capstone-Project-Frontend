@@ -1,15 +1,13 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable camelcase */
 import React, { Component } from 'react';
-import Ctn from '../CSS_modules/Container.module.css';
+import Ctn from '../../CSS_modules/Container.module.css';
 
-class SignUp extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      password_confirmation: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,12 +26,12 @@ class SignUp extends Component {
   }
 
   render() {
-    const { username, password, password_confirmation } = this.state;
+    const { username, password } = this.state;
     return (
       <div>
         <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
         <div className={Ctn.form}>
-          <h4 className={Ctn.txt}>SIGN UP</h4>
+          <h4 className={Ctn.txt}>LOG IN</h4>
           <form onSubmit={this.handleSubmit}>
             <div className={Ctn.div}>
               <label htmlFor="username" className={Ctn.label}>
@@ -47,13 +45,7 @@ class SignUp extends Component {
                 <input type="password" name="password" value={password} onChange={this.handleChange} required />
               </label>
             </div>
-            <div className={Ctn.div}>
-              <label htmlFor="password_confirmation" className={Ctn.label}>
-                Confirm Password
-                <input type="password" name="password_confirmation" value={password_confirmation} onChange={this.handleChange} required />
-              </label>
-            </div>
-            <div className={Ctn.btn}><button type="submit">Sign Up</button></div>
+            <div className={Ctn.btn}><button type="submit">Login</button></div>
           </form>
         </div>
       </div>
@@ -61,4 +53,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default Login;
