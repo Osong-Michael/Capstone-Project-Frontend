@@ -20,10 +20,12 @@ class Home extends Component {
     const shoe = shoes.map(shoe => {
       return (
         <>
-          <Link to={`shoe/${shoe.id}`}>
-            <div className={Ctn.img}><img src={shoe.image} alt={shoe.name} /></div>
-          </Link>
-          <p>{shoe.name}</p>
+          <div key={shoe.id}>
+            <Link to={`shoe/${shoe.id}`}>
+              <div className={Ctn.img}><img src={shoe.image} alt={shoe.name} /></div>
+            </Link>
+            <p>{shoe.name}</p>
+          </div>
         </>
       );
     });

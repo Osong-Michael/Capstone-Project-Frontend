@@ -1,5 +1,9 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { logInUser } from '../../actions/authActions';
 import Ctn from '../../CSS_modules/Container.module.css';
 
 class Login extends Component {
@@ -21,8 +25,20 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    console.log('Form submitted', this.state);
     event.preventDefault();
+    const { logInUser } = this.props;
+    logInUser(this.state);
+    event.target.reset();
+    this.resetState();
+    const { history } = this.props;
+    history.push('/');
+  }
+
+  resetState() {
+    this.setState({
+      username: '',
+      password: '',
+    });
   }
 
   render() {
@@ -53,4 +69,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logInUser,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(Login);

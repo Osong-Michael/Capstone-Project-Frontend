@@ -1,6 +1,10 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import signUpUser from '../../actions/authActions';
 import Ctn from '../../CSS_modules/Container.module.css';
 
 class SignUp extends Component {
@@ -23,8 +27,21 @@ class SignUp extends Component {
   }
 
   handleSubmit(event) {
-    console.log('Form submitted', this.state);
     event.preventDefault();
+    const { signUpUser } = this.props;
+    signUpUser(this.state);
+    event.target.reset();
+    this.resetState();
+    const { history } = this.props;
+    history.push('/');
+  }
+
+  resetState() {
+    this.setState({
+      username: '',
+      password: '',
+      password_confirmation: '',
+    });
   }
 
   render() {
@@ -61,4 +78,8 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  signUpUser,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(SignUp);
