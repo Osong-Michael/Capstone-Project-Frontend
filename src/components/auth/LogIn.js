@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { logInUser } from '../../actions/authActions';
+import { logInUser, checkStatus } from '../../actions/authActions';
 import Ctn from '../../CSS_modules/Container.module.css';
 import { getStatus } from '../../reducers/authReducer';
 
@@ -18,6 +18,11 @@ class Login extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const { checkStatus } = this.props;
+    checkStatus();
   }
 
   handleChange(event) {
@@ -44,6 +49,7 @@ class Login extends Component {
   render() {
     const { username, password } = this.state;
     const { userStatus } = this.props;
+    console.log('From Login', this.props);
     if (userStatus) return <Redirect to="/" />;
     return (
       <div>
@@ -77,6 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   logInUser,
+  checkStatus,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
