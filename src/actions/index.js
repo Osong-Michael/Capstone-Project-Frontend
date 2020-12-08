@@ -59,6 +59,20 @@ function logInError(error) {
   };
 }
 
+function userIsLoggedIn(status) {
+  return {
+    type: 'CHECK_LOGIN_STATUS',
+    status,
+  };
+}
+
+function userIsLoggedOut(status) {
+  return {
+    type: 'LOG_OUT_USER',
+    status,
+  };
+}
+
 export {
   fetchShoesPending,
   fetchShoesSuccess,
@@ -69,4 +83,6 @@ export {
   loggingIn,
   logInSuccess,
   logInError,
+  userIsLoggedIn,
+  userIsLoggedOut,
 };

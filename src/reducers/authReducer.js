@@ -3,6 +3,7 @@ const initState = {
   user: {},
   loading: false,
   error: null,
+  loggedIn: false,
 };
 
 const authReducer = (state = initState, action) => {
@@ -17,6 +18,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         loading: false,
         user: action.user,
+        loggedIn: action.user.logged_in,
       };
     case 'SIGNED_UP_FAILURE':
       return {
@@ -34,6 +36,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         loading: false,
         user: action.user,
+        loggedIn: action.user.logged_in,
       };
     case 'LOGGING_IN_FAILURE':
       return {
@@ -41,12 +44,22 @@ const authReducer = (state = initState, action) => {
         loading: false,
         error: action.error,
       };
+    case 'CHECK_LOGIN_STATUS':
+      return {
+        ...state,
+        loggedIn: action.status.logged_in,
+      };
+    case 'LOG_OUT_USER':
+      return {
+        ...state,
+        loggedIn: action.status.logged_in,
+      };
     default:
       return state;
   }
 };
 
-// export const getShoes = state => state.shoe.shoes;
+export const getStatus = state => state.auth.loggedIn;
 // export const getShoesPending = state => state.shoe.loading;
 
 export default authReducer;

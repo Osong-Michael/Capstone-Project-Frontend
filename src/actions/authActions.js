@@ -7,6 +7,8 @@ import {
   loggingIn,
   logInSuccess,
   logInError,
+  userIsLoggedIn,
+  userIsLoggedOut,
 } from './index';
 
 function signUpUser(credentials) {
@@ -54,5 +56,32 @@ function logInUser(credentials) {
       });
   };
 }
-export { logInUser };
+
+function checkStatus() {
+  return dispatch => {
+    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
+      .then(res => {
+        dispatch(userIsLoggedIn(res.data));
+        return res.data;
+      })
+      .catch(error => {
+        dispatch(logInError(error));
+      });
+  };
+}
+
+function logUserOut() {
+  return dispatch => {
+    axios.delete('http://localhost:3001/logout', { withCredentials: true })
+      .then(res => {
+        dispatch(userIsLoggedOut(res.data));
+        return res.data;
+      })
+      .catch(error => {
+        dispatch(logInError(error));
+      });
+  };
+}
+
+export { logInUser, checkStatus, logUserOut };
 export default signUpUser;

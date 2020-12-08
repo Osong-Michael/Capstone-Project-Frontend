@@ -1,16 +1,45 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint linebreak-style: [2, "windows"] */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { ReactComponent as CloseMenu } from '../assets/x.svg';
 import { ReactComponent as MenuIcon } from '../assets/menu.svg';
 import '../CSS_modules/nav.css';
+import { logUserOut } from '../actions/authActions';
+import { getStatus } from '../reducers/authReducer';
 
-const Navbar = () => {
+const Navbar = props => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const { userStatus } = props;
+  const logOutUser = () => {
+    const { logUserOut } = props;
+    logUserOut();
+  };
+  const signedOutLinks = (
+    <>
+      <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
+        <Link to="/login" className="sign-up">Log In</Link>
+      </li>
+      <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
+        <Link to="/signup" className="sign-up">
+          Sign Up
+        </Link>
+      </li>
+    </>
+  );
+  const signedInLinks = (
+    <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
+      <button type="button" className="logout-btn" onClick={logOutUser}>Log Out</button>
+    </li>
+  );
+
+  const links = userStatus ? signedInLinks : signedOutLinks;
 
   return (
     <nav>
@@ -22,14 +51,7 @@ const Navbar = () => {
             </Link>
           </div>
           <ul className={click ? 'nav-options active' : 'nav-options'}>
-            <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
-              <Link to="/login" className="sign-up">Log In</Link>
-            </li>
-            <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
-              <Link to="/signup" className="sign-up">
-                Sign Up
-              </Link>
-            </li>
+            { links }
           </ul>
         </div>
         <div className="mobile-menu" onClick={handleClick} onKeyDown={closeMobileMenu}>
@@ -44,4 +66,12 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => ({
+  userStatus: getStatus(state),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logUserOut,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

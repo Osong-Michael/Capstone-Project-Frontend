@@ -99,3 +99,8 @@
 	width: 100%;
 	padding-right: 90px;
 }
+
+.links a {
+	color: white;
+	text-decoration: none;
+}
