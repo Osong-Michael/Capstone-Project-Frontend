@@ -19,6 +19,26 @@ function fetchShoesError(error) {
   };
 }
 
+function fetchOneShoePending() {
+  return {
+    type: 'FETCHING_ONE_SHOE',
+  };
+}
+
+function fetchOneShoeSuccess(shoe) {
+  return {
+    type: 'FETCHED_ONE_SHOE',
+    shoe,
+  };
+}
+
+function fetchOneShoeError(error) {
+  return {
+    type: 'FETCHING_ONE_SHOE_FAILED',
+    error,
+  };
+}
+
 function signingUp() {
   return {
     type: 'SIGNING_UP',
@@ -77,6 +97,9 @@ export {
   fetchShoesPending,
   fetchShoesSuccess,
   fetchShoesError,
+  fetchOneShoePending,
+  fetchOneShoeSuccess,
+  fetchOneShoeError,
   signingUp,
   signUpSuccess,
   signUpError,

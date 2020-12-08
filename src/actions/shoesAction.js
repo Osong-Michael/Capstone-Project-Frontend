@@ -4,6 +4,9 @@ import {
   fetchShoesPending,
   fetchShoesSuccess,
   fetchShoesError,
+  fetchOneShoePending,
+  fetchOneShoeSuccess,
+  fetchOneShoeError,
 } from './index';
 
 function fetchShoes() {
@@ -22,18 +25,14 @@ function fetchShoes() {
 
 function fetchShoe(id) {
   return dispatch => {
-    dispatch(fetchShoesPending());
-    fetch(`http://localhost:3001/shoes/${id}`)
-      .then(res => res.json())
+    dispatch(fetchOneShoePending());
+    axios.get(`http://localhost:3001/shoes/${id}`)
       .then(res => {
-        if (res.error) {
-          throw (res.error);
-        }
-        dispatch(fetchShoesSuccess(res));
-        return res;
+        dispatch(fetchOneShoeSuccess(res.data));
+        return res.data;
       })
       .catch(error => {
-        dispatch(fetchShoesError(error));
+        dispatch(fetchOneShoeError(error));
       });
   };
 }

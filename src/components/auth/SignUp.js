@@ -4,8 +4,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 import signUpUser from '../../actions/authActions';
 import Ctn from '../../CSS_modules/Container.module.css';
+import { getStatus } from '../../reducers/authReducer';
 
 class SignUp extends Component {
   constructor(props) {
@@ -32,8 +34,6 @@ class SignUp extends Component {
     signUpUser(this.state);
     event.target.reset();
     this.resetState();
-    const { history } = this.props;
-    history.push('/');
   }
 
   resetState() {
@@ -46,6 +46,8 @@ class SignUp extends Component {
 
   render() {
     const { username, password, password_confirmation } = this.state;
+    const { userStatus } = this.props;
+    if (userStatus) return <Redirect to="/" />;
     return (
       <div>
         <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
@@ -78,8 +80,12 @@ class SignUp extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  userStatus: getStatus(state),
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   signUpUser,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

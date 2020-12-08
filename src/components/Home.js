@@ -25,7 +25,7 @@ class Home extends Component {
       return (
         <>
           <div key={shoe.id} className={Ctn.links}>
-            <Link to={`shoe/${shoe.id}`}>
+            <Link to={`shoes/${shoe.id}`}>
               <div className={Ctn.img}><img src={shoe.image} alt={shoe.name} /></div>
               <p>{shoe.name}</p>
             </Link>
@@ -33,7 +33,7 @@ class Home extends Component {
         </>
       );
     });
-    if (userStatus === false) return <Redirect to="/login" />;
+    if (!userStatus) return <Redirect to="/login" />;
     return (
       <>
         <div>

@@ -1,0 +1,65 @@
+.my-shoe {
+	/* border: 2px solid white; */
+	height: 400px;
+	overflow-y: scroll;
+	box-sizing: border-box;
+}
+
+.my-shoe::-webkit-scrollbar {
+	display: none;
+}
+
+.my-shoe {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.shoe-name {
+	text-align: center;
+	color: white;
+}
+
+.shoe-con {
+	height: 150px;
+	width: 200px;
+	/* border: 1px solid red; */
+	padding: 0;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.shoe-con img {
+	width: 100%;
+}
+
+.shoe-details {
+	color: white;
+	/* border: 1px solid red; */
+	width: 90%;
+	margin: 10px auto;
+	text-align: center;
+}
+
+.btns-below {
+	/* border: 1px solid red; */
+	display: flex;
+	justify-content: space-around;
+}
+
+.btns-below a {
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+}
+
+.btns-below button {
+	border: none;
+	outline: none;
+	background: none;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+}

@@ -2,9 +2,11 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { logInUser } from '../../actions/authActions';
 import Ctn from '../../CSS_modules/Container.module.css';
+import { getStatus } from '../../reducers/authReducer';
 
 class Login extends Component {
   constructor(props) {
@@ -30,8 +32,6 @@ class Login extends Component {
     logInUser(this.state);
     event.target.reset();
     this.resetState();
-    const { history } = this.props;
-    history.push('/');
   }
 
   resetState() {
@@ -43,6 +43,8 @@ class Login extends Component {
 
   render() {
     const { username, password } = this.state;
+    const { userStatus } = this.props;
+    if (userStatus) return <Redirect to="/" />;
     return (
       <div>
         <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
@@ -69,8 +71,12 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  userStatus: getStatus(state),
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   logInUser,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
