@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */

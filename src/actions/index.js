@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 function fetchShoesPending() {
   return {
     type: 'FETCHING_SHOES',

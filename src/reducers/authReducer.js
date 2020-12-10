@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const initState = {
   user: {},
   loading: false,
@@ -60,6 +59,5 @@ const authReducer = (state = initState, action) => {
 };
 
 export const getStatus = state => state.auth.loggedIn;
-// export const getShoesPending = state => state.shoe.loading;
 
 export default authReducer;
