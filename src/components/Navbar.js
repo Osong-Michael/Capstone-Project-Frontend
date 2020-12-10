@@ -34,9 +34,16 @@ const Navbar = props => {
     </>
   );
   const signedInLinks = (
-    <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
-      <button type="button" className="logout-btn" onClick={logOutUser}>Log Out</button>
-    </li>
+    <>
+      <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
+        <Link to="/favourites" className="sign-up">
+          My Favourites
+        </Link>
+      </li>
+      <li className="option mobile-option" onClick={closeMobileMenu} onKeyDown={closeMobileMenu}>
+        <button type="button" className="logout-btn" onClick={logOutUser}>Log Out</button>
+      </li>
+    </>
   );
 
   const links = userStatus ? signedInLinks : signedOutLinks;

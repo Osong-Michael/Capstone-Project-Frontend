@@ -6,6 +6,7 @@ import SignUp from './components/auth/SignUp';
 import Login from './components/auth/LogIn';
 import './App.css';
 import Shoe from './components/Shoe';
+import Favourites from './components/Favourites';
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/shoes/:id" component={Shoe} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={Login} />
+            <Route path="/shoes/:id" component={Shoe} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
+            <Route path="/favourites" component={Favourites} />
           </Switch>
         </div>
       </div>
