@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import Ctn from '../CSS_modules/Container.module.css';
 import { getShoes, getShoesPending } from '../reducers/shoesReducer';
 import { getStatus } from '../reducers/authReducer';
 import fetchShoes from '../actions/shoesAction';
 import { checkStatus } from '../actions/authActions';
+import ShoeList from './ShoeList';
 
 class Home extends Component {
   componentDidMount() {
@@ -18,20 +19,8 @@ class Home extends Component {
 
   render() {
     const { shoes, userStatus } = this.props;
-    console.log(userStatus);
-    // eslint-disable-next-line arrow-body-style
-    const shoe = shoes.map(shoe => {
-      return (
-        <>
-          <div key={shoe.id} className={Ctn.links}>
-            <Link to={`shoes/${shoe.id}`}>
-              <div className={Ctn.img}><img src={shoe.image} alt={shoe.name} /></div>
-              <p>{shoe.name}</p>
-            </Link>
-          </div>
-        </>
-      );
-    });
+    const shoe = shoes.map(shoe => (<ShoeList shoe={shoe} key={Math.random()} />));
+
     if (!userStatus) return <Redirect to="/login" />;
     return (
       <>

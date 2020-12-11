@@ -1,19 +1,34 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { checkStatus } from '../actions/authActions';
+import getFavourites from '../actions/favouritesAction';
+import ShoeList from './ShoeList';
+import Ctn from '../CSS_modules/Container.module.css';
 
 const Favourites = () => {
-  const { status } = useSelector(state => ({
+  const { status, favShoes } = useSelector(state => ({
     status: state.auth.loggedIn,
+    favShoes: state.fav.shoes.user_shoes,
   }));
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(getFavourites());
     checkStatus();
-  }, []);
+  }, [dispatch]);
   if (!status) return <Redirect to="/login" />;
+  const shoe = favShoes.map(shoe => (<ShoeList shoe={shoe} key={Math.random()} />));
   return (
-    <di><h1>My favourites</h1></di>
+    <>
+      <div>
+        <h2 className={Ctn.welcome_text}>Your Favourite Collection</h2>
+      </div>
+      <div className={Ctn.shoes}>
+        {shoe}
+      </div>
+    </>
   );
 };
 

@@ -47,6 +47,7 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         loggedIn: action.status.logged_in,
+        user: action.status.user,
       };
     case 'LOG_OUT_USER':
       return {
@@ -59,5 +60,6 @@ const authReducer = (state = initState, action) => {
 };
 
 export const getStatus = state => state.auth.loggedIn;
+export const getUser = state => state.auth.user;
 
 export default authReducer;

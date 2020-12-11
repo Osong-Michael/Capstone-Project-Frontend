@@ -92,6 +92,13 @@ function userIsLoggedOut(status) {
   };
 }
 
+function getFavouriteShoes(shoes) {
+  return {
+    type: 'FETCHED_FAVOURITES',
+    shoes,
+  };
+}
+
 export {
   fetchShoesPending,
   fetchShoesSuccess,
@@ -107,4 +114,5 @@ export {
   logInError,
   userIsLoggedIn,
   userIsLoggedOut,
+  getFavouriteShoes,
 };
