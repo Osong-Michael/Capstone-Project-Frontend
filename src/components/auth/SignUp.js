@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { RingLoader } from 'react-spinners';
 import signUpUser, { checkStatus } from '../../actions/authActions';
-import Ctn from '../../css/Container.module.css';
+import Ctn from '../../assets/css/Container.module.css';
 import { getStatus, getLoading } from '../../reducers/authReducer';
 
 class SignUp extends Component {

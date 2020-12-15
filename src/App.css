@@ -21,7 +21,7 @@ body {
 .App {
 	width: 265px;
 	height: 570px;
-	background-image: url('./images/bg-1.jpg');
+	background-image: url('./assets/images/bg-1.jpg');
 	background-repeat: no-repeat;
 	background-position: center;
 	position: absolute;

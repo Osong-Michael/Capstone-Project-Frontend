@@ -14,8 +14,8 @@ import { getOneShoe, getShoesPending } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
 import { getStatus, getUser, getFavShoes } from '../reducers/authReducer';
 import { createFav } from '../actions/favouritesAction';
-import '../css/shoe.css';
-import Ctn from '../css/Container.module.css';
+import '../assets/css/shoe.css';
+import Ctn from '../assets/css/Container.module.css';
 
 class Shoe extends Component {
   constructor(props) {

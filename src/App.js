@@ -7,7 +7,7 @@ import Login from './components/auth/LogIn';
 import './App.css';
 import Shoe from './components/Shoe';
 import Favourites from './components/Favourites';
-import phoneBg from './images/Bg3.png';
+import phoneBg from './assets/images/Bg3.png';
 
 function App() {
   return (
