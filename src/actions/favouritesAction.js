@@ -21,11 +21,9 @@ function getFavourites() {
 }
 
 function createFav(shoeId, userId) {
-  console.log('API content', shoeId, userId);
   return dispatch => {
     axios.post(`http://localhost:3001/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
       .then(res => {
-        console.log('After Fetch', res);
         dispatch(getFavouriteShoesSuccess(res.data));
       })
       .catch(error => {

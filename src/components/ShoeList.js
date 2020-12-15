@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Ctn from '../assets/css/Container.module.css';
 
 const ShoeList = props => {
@@ -14,6 +14,14 @@ const ShoeList = props => {
       </Link>
     </div>
   );
+};
+
+ShoeList.propTypes = {
+  shoe: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image: PropTypes.string,
+  }).isRequired,
 };
 
 export default ShoeList;

@@ -1,74 +1,68 @@
 .my-shoe {
-	height: 500px;
-	overflow-y: scroll;
-	box-sizing: border-box;
-}
-
-.my-shoe::-webkit-scrollbar {
-	display: none;
-}
-
-.my-shoe {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  height: 500px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .shoe-name {
-	text-align: center;
-	color: #ee0841;
+  text-align: center;
+  color: #ee0841;
 }
 
 .price {
-	color: white;
+  color: white;
 }
 
 .shoe-con {
-	height: 150px;
-	width: 200px;
-	/* border: 1px solid red; */
-	padding: 0;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  height: 150px;
+  width: 200px;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .shoe-con img {
-	width: 100%;
+  width: 100%;
 }
 
 .shoe-details {
-	color: white;
-	/* border: 1px solid red; */
-	width: 90%;
-	margin: 10px auto;
-	text-align: center;
+  color: white;
+  width: 90%;
+  margin: 10px auto;
+  text-align: center;
 }
 
 .btns-below {
-	/* border: 1px solid red; */
-	display: flex;
-	justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .btns-below a {
-	color: white;
-	text-decoration: none;
-	font-size: 18px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .btns-below button {
-	border: none;
-	outline: none;
-	background: none;
-	color: white;
-	cursor: pointer;
-	font-size: 18px;
-	font-family: 'Trade Winds', cursive;
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Trade Winds', cursive;
 }
 
 .btns-below a:hover,
 .btns-below button:hover {
-	color: #ee0841;
+  color: #ee0841;
+}
+
+.my-shoe::-webkit-scrollbar {
+  display: none;
 }

@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { ReactComponent as CloseMenu } from '../assets/x.svg';
 import { ReactComponent as MenuIcon } from '../assets/menu.svg';
 import '../assets/css/nav.css';
@@ -70,6 +70,11 @@ const Navbar = props => {
       </div>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  logUserOut: PropTypes.func.isRequired,
+  userStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

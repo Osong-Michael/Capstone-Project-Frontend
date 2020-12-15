@@ -1,14 +1,12 @@
-/* eslint-disable max-len */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable class-methods-use-this */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
 import { RingLoader } from 'react-spinners';
+import PropTypes from 'prop-types';
 import { fetchShoe } from '../actions/shoesAction';
 import { getOneShoe, getShoesPending } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
@@ -63,10 +61,10 @@ class Shoe extends Component {
     if (!userStatus) return <Redirect to="/login" />;
     let btn;
     const shoeIds = [];
-    for (const shoes of userFavourites) {
+    userFavourites.forEach(shoes => {
       const id = 'id';
       shoeIds.push(shoes[id]);
-    }
+    });
 
     if (shoeIds.length > 0) {
       if (shoeIds.includes(shoe.id)) {
@@ -102,6 +100,21 @@ class Shoe extends Component {
     );
   }
 }
+
+Shoe.propTypes = {
+  fetchShoe: PropTypes.func.isRequired,
+  shoe: PropTypes.shape({
+    id: PropTypes.number,
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
+  userStatus: PropTypes.bool.isRequired,
+  checkStatus: PropTypes.func.isRequired,
+  userFavourites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  createFav: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   shoe: getOneShoe(state),

@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { RingLoader } from 'react-spinners';
+import PropTypes from 'prop-types';
 import signUpUser, { checkStatus } from '../../actions/authActions';
 import Ctn from '../../assets/css/Container.module.css';
 import { getStatus, getLoading } from '../../reducers/authReducer';
@@ -91,6 +91,13 @@ class SignUp extends Component {
     );
   }
 }
+
+SignUp.propTypes = {
+  signUpUser: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  userStatus: PropTypes.bool.isRequired,
+  checkStatus: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   userStatus: getStatus(state),

@@ -75,7 +75,6 @@ function logUserOut() {
   return dispatch => {
     axios.delete('http://localhost:3001/logout', { withCredentials: true })
       .then(res => {
-        console.log('From LogOut', res.data);
         dispatch(userIsLoggedOut(res.data));
         return res.data;
       })

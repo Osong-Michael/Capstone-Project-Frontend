@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { RingLoader } from 'react-spinners';
 import Ctn from '../assets/css/Container.module.css';
 import { getShoes, getShoesPending } from '../reducers/shoesReducer';
@@ -40,6 +40,14 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  fetchShoes: PropTypes.func.isRequired,
+  shoes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool.isRequired,
+  userStatus: PropTypes.bool.isRequired,
+  checkStatus: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   shoes: getShoes(state),

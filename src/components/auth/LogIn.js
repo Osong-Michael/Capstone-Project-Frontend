@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { RingLoader } from 'react-spinners';
 import { logInUser, checkStatus } from '../../actions/authActions';
 import Ctn from '../../assets/css/Container.module.css';
@@ -82,6 +82,13 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  logInUser: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  userStatus: PropTypes.bool.isRequired,
+  checkStatus: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   userStatus: getStatus(state),
