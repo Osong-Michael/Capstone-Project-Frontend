@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
@@ -9,7 +11,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { fetchShoe } from '../actions/shoesAction';
 import { getOneShoe } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
-import { getStatus, getUser } from '../reducers/authReducer';
+import { getStatus, getUser, getFavShoes } from '../reducers/authReducer';
 import { createFav } from '../actions/favouritesAction';
 import '../CSS_modules/shoe.css';
 
@@ -22,14 +24,33 @@ class Shoe extends Component {
   }
 
   createLike(shoeId, userId) {
-    const { createFav, history } = this.props;
+    const { createFav } = this.props;
     createFav(shoeId, userId);
-    history.push('/');
   }
 
   render() {
-    const { shoe, userStatus, user } = this.props;
+    const {
+      shoe,
+      userStatus,
+      user,
+      userFavourites,
+    } = this.props;
     if (!userStatus) return <Redirect to="/login" />;
+    let btn;
+    const shoeIds = [];
+    for (const shoes of userFavourites) {
+      const id = 'id';
+      shoeIds.push(shoes[id]);
+    }
+
+    if (shoeIds.length > 0) {
+      if (shoeIds.includes(shoe.id)) {
+        btn = <button type="button" onClick={() => this.createLike(shoe.id, user.id)}>Unlike</button>;
+      } else {
+        btn = <button type="button" onClick={() => this.createLike(shoe.id, user.id)}>Like</button>;
+      }
+    }
+
     return (
       <div className="my-shoe">
         <h2 className="shoe-name">{shoe.name}</h2>
@@ -40,7 +61,7 @@ class Shoe extends Component {
         <p className="shoe-details">{shoe.description}</p>
         <div className="btns-below">
           <p><Link to="/">Back</Link></p>
-          <p><button type="button" onClick={() => this.createLike(shoe.id, user.id)}>Like</button></p>
+          <p>{btn}</p>
         </div>
       </div>
     );
@@ -51,6 +72,7 @@ const mapStateToProps = state => ({
   shoe: getOneShoe(state),
   userStatus: getStatus(state),
   user: getUser(state),
+  userFavourites: getFavShoes(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -1,5 +1,6 @@
 const initState = {
   user: {},
+  favShoes: [],
   loading: false,
   error: null,
   loggedIn: false,
@@ -48,6 +49,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         loggedIn: action.status.logged_in,
         user: action.status.user,
+        favShoes: action.status.user_fav,
       };
     case 'LOG_OUT_USER':
       return {
@@ -61,5 +63,6 @@ const authReducer = (state = initState, action) => {
 
 export const getStatus = state => state.auth.loggedIn;
 export const getUser = state => state.auth.user;
+export const getFavShoes = state => state.auth.favShoes;
 
 export default authReducer;
