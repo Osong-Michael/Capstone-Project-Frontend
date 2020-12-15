@@ -1,6 +1,5 @@
 .my-shoe {
-	/* border: 2px solid white; */
-	height: 400px;
+	height: 500px;
 	overflow-y: scroll;
 	box-sizing: border-box;
 }
@@ -16,6 +15,10 @@
 
 .shoe-name {
 	text-align: center;
+	color: #ee0841;
+}
+
+.price {
 	color: white;
 }
 
@@ -62,4 +65,10 @@
 	color: white;
 	cursor: pointer;
 	font-size: 18px;
+	font-family: 'Trade Winds', cursive;
+}
+
+.btns-below a:hover,
+.btns-below button:hover {
+	color: #ee0841;
 }

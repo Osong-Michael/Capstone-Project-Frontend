@@ -1,7 +1,7 @@
 .welcome_text,
 .txt {
 	text-align: center;
-	color: white;
+	color: #ee0841;
 }
 
 .txt {
@@ -27,7 +27,7 @@
 }
 
 .label {
-	color: white;
+	color: #ee0841;
 }
 
 .label input {
@@ -62,21 +62,21 @@
 	background: honeydew;
 	border-radius: 10px;
 	width: 100%;
+	font-family: 'Trade Winds', cursive;
 }
 
 .shoes {
-	/* border: 1px solid blue; */
 	width: 100%;
 	padding: 8px;
 	text-align: center;
 	color: white;
-	height: 350px;
+	height: 400px;
 	overflow-y: scroll;
 	box-sizing: border-box;
 }
 
 .shoes p {
-	/* border: 2px solid green; */
+	/* border: 1px solid red; */
 	margin-top: -3px;
 }
 
@@ -104,4 +104,8 @@
 .links a {
 	color: white;
 	text-decoration: none;
+}
+
+.links a:hover {
+	color: #ee0841;
 }

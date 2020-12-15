@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Ctn from '../CSS_modules/Container.module.css';
+import Ctn from '../css/Container.module.css';
 
 const ShoeList = props => {
   const { shoe } = props;

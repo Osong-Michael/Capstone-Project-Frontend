@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import Ctn from '../CSS_modules/Container.module.css';
+import Ctn from '../css/Container.module.css';
 import { getShoes, getShoesPending } from '../reducers/shoesReducer';
 import { getStatus } from '../reducers/authReducer';
 import fetchShoes from '../actions/shoesAction';

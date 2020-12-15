@@ -7,11 +7,13 @@ import Login from './components/auth/LogIn';
 import './App.css';
 import Shoe from './components/Shoe';
 import Favourites from './components/Favourites';
+import phoneBg from './images/Bg3.png';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="mobile">
+        <img src={phoneBg} alt="background" />
         <div className="App">
           <Navbar />
           <Switch>

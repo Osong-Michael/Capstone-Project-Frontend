@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { logInUser, checkStatus } from '../../actions/authActions';
-import Ctn from '../../CSS_modules/Container.module.css';
+import Ctn from '../../css/Container.module.css';
 import { getStatus } from '../../reducers/authReducer';
 
 class Login extends Component {
@@ -48,7 +48,6 @@ class Login extends Component {
   render() {
     const { username, password } = this.state;
     const { userStatus } = this.props;
-    console.log('From Login', this.props);
     if (userStatus) return <Redirect to="/" />;
     return (
       <div>

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ReactComponent as CloseMenu } from '../assets/x.svg';
 import { ReactComponent as MenuIcon } from '../assets/menu.svg';
-import '../CSS_modules/nav.css';
+import '../css/nav.css';
 import { logUserOut } from '../actions/authActions';
 import { getStatus } from '../reducers/authReducer';
 

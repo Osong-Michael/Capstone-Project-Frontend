@@ -13,7 +13,7 @@ import { getOneShoe } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
 import { getStatus, getUser, getFavShoes } from '../reducers/authReducer';
 import { createFav } from '../actions/favouritesAction';
-import '../CSS_modules/shoe.css';
+import '../css/shoe.css';
 
 class Shoe extends Component {
   constructor(props) {
@@ -72,7 +72,10 @@ class Shoe extends Component {
         <h2 className="shoe-name">{shoe.name}</h2>
         <div className="shoe-con">
           <img src={shoe.image} alt={shoe.name} />
-          <p className="shoe-name">{shoe.price}</p>
+          <p className="shoe-name price">
+            Price:&nbsp;
+            {shoe.price}
+          </p>
         </div>
         <p className="shoe-details">{shoe.description}</p>
         <div className="btns-below">

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import signUpUser, { checkStatus } from '../../actions/authActions';
-import Ctn from '../../CSS_modules/Container.module.css';
+import Ctn from '../../css/Container.module.css';
 import { getStatus } from '../../reducers/authReducer';
 
 class SignUp extends Component {

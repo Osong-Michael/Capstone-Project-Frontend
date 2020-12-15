@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { checkStatus } from '../actions/authActions';
 import getFavourites from '../actions/favouritesAction';
 import ShoeList from './ShoeList';
-import Ctn from '../CSS_modules/Container.module.css';
+import Ctn from '../css/Container.module.css';
 
 const Favourites = () => {
   const { status, favShoes } = useSelector(state => ({
