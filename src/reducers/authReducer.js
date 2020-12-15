@@ -44,9 +44,15 @@ const authReducer = (state = initState, action) => {
         loading: false,
         error: action.error,
       };
+    case 'CHECK_LOGIN_STATUS_START':
+      return {
+        ...state,
+        loading: true,
+      };
     case 'CHECK_LOGIN_STATUS':
       return {
         ...state,
+        loading: false,
         loggedIn: action.status.logged_in,
         user: action.status.user,
         favShoes: action.status.user_fav,
@@ -64,5 +70,6 @@ const authReducer = (state = initState, action) => {
 export const getStatus = state => state.auth.loggedIn;
 export const getUser = state => state.auth.user;
 export const getFavShoes = state => state.auth.favShoes;
+export const getLoading = state => state.auth.loading;
 
 export default authReducer;

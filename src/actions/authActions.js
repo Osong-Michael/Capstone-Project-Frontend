@@ -8,6 +8,7 @@ import {
   logInError,
   userIsLoggedIn,
   userIsLoggedOut,
+  userIsLoggedInPending,
 } from './index';
 
 function signUpUser(credentials) {
@@ -22,7 +23,6 @@ function signUpUser(credentials) {
     },
     { withCredentials: true })
       .then(res => {
-        console.log('From Sign Up', res.data);
         dispatch(signUpSuccess(res.data));
         return res.data;
       })
@@ -47,7 +47,6 @@ function logInUser(credentials) {
           dispatch(logInError(res.data));
         }
         if (res.data.status === 'created') {
-          console.log('From Log In', res.data);
           dispatch(logInSuccess(res.data));
         }
         return res.data;
@@ -60,9 +59,9 @@ function logInUser(credentials) {
 
 function checkStatus() {
   return dispatch => {
+    dispatch(userIsLoggedInPending());
     axios.get('http://localhost:3001/logged_in', { withCredentials: true })
       .then(res => {
-        console.log('From Status Check', res.data);
         dispatch(userIsLoggedIn(res.data));
         return res.data;
       })

@@ -8,12 +8,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, Redirect } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 import { fetchShoe } from '../actions/shoesAction';
-import { getOneShoe } from '../reducers/shoesReducer';
+import { getOneShoe, getShoesPending } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
 import { getStatus, getUser, getFavShoes } from '../reducers/authReducer';
 import { createFav } from '../actions/favouritesAction';
 import '../css/shoe.css';
+import Ctn from '../css/Container.module.css';
 
 class Shoe extends Component {
   constructor(props) {
@@ -30,8 +32,14 @@ class Shoe extends Component {
   }
 
   createLike() {
-    const { createFav, user, shoe } = this.props;
+    const {
+      createFav,
+      user,
+      shoe,
+      history,
+    } = this.props;
     createFav(shoe.id, user.id);
+    history.push('/favourites');
   }
 
   handleClick(e) {
@@ -50,6 +58,7 @@ class Shoe extends Component {
       shoe,
       userStatus,
       userFavourites,
+      loading,
     } = this.props;
     if (!userStatus) return <Redirect to="/login" />;
     let btn;
@@ -68,21 +77,28 @@ class Shoe extends Component {
     }
 
     return (
-      <div className="my-shoe">
-        <h2 className="shoe-name">{shoe.name}</h2>
-        <div className="shoe-con">
-          <img src={shoe.image} alt={shoe.name} />
-          <p className="shoe-name price">
-            Price:&nbsp;
-            {shoe.price}
-          </p>
+      <>
+        {loading && (
+          <div className={Ctn.loading}>
+            <RingLoader loading={loading} />
+          </div>
+        )}
+        <div className="my-shoe">
+          <h2 className="shoe-name">{shoe.name}</h2>
+          <div className="shoe-con">
+            <img src={shoe.image} alt={shoe.name} />
+            <p className="shoe-name price">
+              Price:&nbsp;
+              {shoe.price}
+            </p>
+          </div>
+          <p className="shoe-details">{shoe.description}</p>
+          <div className="btns-below">
+            <p><Link to="/">Back</Link></p>
+            <p>{btn}</p>
+          </div>
         </div>
-        <p className="shoe-details">{shoe.description}</p>
-        <div className="btns-below">
-          <p><Link to="/">Back</Link></p>
-          <p>{btn}</p>
-        </div>
-      </div>
+      </>
     );
   }
 }
@@ -90,6 +106,7 @@ class Shoe extends Component {
 const mapStateToProps = state => ({
   shoe: getOneShoe(state),
   userStatus: getStatus(state),
+  loading: getShoesPending(state),
   user: getUser(state),
   userFavourites: getFavShoes(state),
 });

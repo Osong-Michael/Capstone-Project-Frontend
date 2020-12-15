@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 import signUpUser, { checkStatus } from '../../actions/authActions';
 import Ctn from '../../css/Container.module.css';
-import { getStatus } from '../../reducers/authReducer';
+import { getStatus, getLoading } from '../../reducers/authReducer';
 
 class SignUp extends Component {
   constructor(props) {
@@ -50,42 +51,50 @@ class SignUp extends Component {
 
   render() {
     const { username, password, password_confirmation } = this.state;
-    const { userStatus } = this.props;
+    const { userStatus, loading } = this.props;
     if (userStatus) return <Redirect to="/" />;
     return (
-      <div>
-        <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
-        <div className={Ctn.form}>
-          <h4 className={Ctn.txt}>SIGN UP</h4>
-          <form onSubmit={this.handleSubmit}>
-            <div className={Ctn.div}>
-              <label htmlFor="username" className={Ctn.label}>
-                Username
-                <input type="text" name="username" value={username} onChange={this.handleChange} required />
-              </label>
-            </div>
-            <div className={Ctn.div}>
-              <label htmlFor="password" className={Ctn.label}>
-                Password
-                <input type="password" name="password" value={password} onChange={this.handleChange} required />
-              </label>
-            </div>
-            <div className={Ctn.div}>
-              <label htmlFor="password_confirmation" className={Ctn.label}>
-                Confirm Password
-                <input type="password" name="password_confirmation" value={password_confirmation} onChange={this.handleChange} required />
-              </label>
-            </div>
-            <div className={Ctn.btn}><button type="submit">Sign Up</button></div>
-          </form>
+      <>
+        {loading && (
+          <div className={Ctn.loading}>
+            <RingLoader loading={loading} />
+          </div>
+        )}
+        <div>
+          <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
+          <div className={Ctn.form}>
+            <h4 className={Ctn.txt}>SIGN UP</h4>
+            <form onSubmit={this.handleSubmit}>
+              <div className={Ctn.div}>
+                <label htmlFor="username" className={Ctn.label}>
+                  Username
+                  <input type="text" name="username" value={username} onChange={this.handleChange} required />
+                </label>
+              </div>
+              <div className={Ctn.div}>
+                <label htmlFor="password" className={Ctn.label}>
+                  Password
+                  <input type="password" name="password" value={password} onChange={this.handleChange} required />
+                </label>
+              </div>
+              <div className={Ctn.div}>
+                <label htmlFor="password_confirmation" className={Ctn.label}>
+                  Confirm Password
+                  <input type="password" name="password_confirmation" value={password_confirmation} onChange={this.handleChange} required />
+                </label>
+              </div>
+              <div className={Ctn.btn}><button type="submit">Sign Up</button></div>
+            </form>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
 
 const mapStateToProps = state => ({
   userStatus: getStatus(state),
+  loading: getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

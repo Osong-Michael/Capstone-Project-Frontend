@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { RingLoader } from 'react-spinners';
 import Ctn from '../css/Container.module.css';
 import { getShoes, getShoesPending } from '../reducers/shoesReducer';
 import { getStatus } from '../reducers/authReducer';
@@ -18,12 +19,17 @@ class Home extends Component {
   }
 
   render() {
-    const { shoes, userStatus } = this.props;
+    const { shoes, userStatus, loading } = this.props;
     const shoe = shoes.map(shoe => (<ShoeList shoe={shoe} key={Math.random()} />));
 
     if (!userStatus) return <Redirect to="/login" />;
     return (
       <>
+        {loading && (
+          <div className={Ctn.loading}>
+            <RingLoader loading={loading} />
+          </div>
+        )}
         <div>
           <h2 className={Ctn.welcome_text}>Welcome to your Sneaker Collection</h2>
         </div>

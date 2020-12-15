@@ -78,6 +78,12 @@ function logInError(error) {
   };
 }
 
+function userIsLoggedInPending() {
+  return {
+    type: 'CHECK_LOGIN_STATUS_START',
+  };
+}
+
 function userIsLoggedIn(status) {
   return {
     type: 'CHECK_LOGIN_STATUS',
@@ -120,6 +126,7 @@ export {
   logInSuccess,
   logInError,
   userIsLoggedIn,
+  userIsLoggedInPending,
   userIsLoggedOut,
   getFavouriteShoes,
   getFavouriteShoesSuccess,
