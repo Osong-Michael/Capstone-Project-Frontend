@@ -16,6 +16,12 @@ import { createFav } from '../actions/favouritesAction';
 import '../CSS_modules/shoe.css';
 
 class Shoe extends Component {
+  constructor(props) {
+    super(props);
+    this.createLike = this.createLike.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentDidMount() {
     const { fetchShoe, checkStatus } = this.props;
     const id = this.props.match.params.id;
@@ -23,16 +29,26 @@ class Shoe extends Component {
     checkStatus();
   }
 
-  createLike(shoeId, userId) {
-    const { createFav } = this.props;
-    createFav(shoeId, userId);
+  createLike() {
+    const { createFav, user, shoe } = this.props;
+    createFav(shoe.id, user.id);
+  }
+
+  handleClick(e) {
+    if (e.target.value === 'favourite') {
+      e.target.value = 'not-favourite';
+      e.target.textContent = 'Like';
+    } else {
+      e.target.value = 'favourite';
+      e.target.textContent = 'Unlike';
+    }
+    this.createLike();
   }
 
   render() {
     const {
       shoe,
       userStatus,
-      user,
       userFavourites,
     } = this.props;
     if (!userStatus) return <Redirect to="/login" />;
@@ -45,9 +61,9 @@ class Shoe extends Component {
 
     if (shoeIds.length > 0) {
       if (shoeIds.includes(shoe.id)) {
-        btn = <button type="button" onClick={() => this.createLike(shoe.id, user.id)}>Unlike</button>;
+        btn = <button type="button" onClick={this.handleClick} value="favorite">Unlike</button>;
       } else {
-        btn = <button type="button" onClick={() => this.createLike(shoe.id, user.id)}>Like</button>;
+        btn = <button type="button" onClick={this.handleClick} value="not-favorite">Like</button>;
       }
     }
 

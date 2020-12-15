@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Ctn from '../CSS_modules/Container.module.css';
 
 const ShoeList = props => {
-  // console.log('From Shoe List', props);
   const { shoe } = props;
 
   return (

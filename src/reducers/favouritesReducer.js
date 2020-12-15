@@ -1,5 +1,6 @@
 const initState = {
   shoes: {},
+  status: '',
   loading: false,
   error: null,
 };
@@ -22,6 +23,12 @@ const favouriteReducer = (state = initState, action) => {
         ...state,
         loading: false,
         error: action.error,
+      };
+    case 'FETCHED_FAVOURITES_SUCCESSFUL':
+      return {
+        ...state,
+        loading: false,
+        status: action.status,
       };
     default:
       return state;

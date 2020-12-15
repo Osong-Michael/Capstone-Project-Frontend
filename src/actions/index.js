@@ -99,6 +99,13 @@ function getFavouriteShoes(shoes) {
   };
 }
 
+function getFavouriteShoesSuccess(status) {
+  return {
+    type: 'FETCHED_FAVOURITES_SUCCESSFUL',
+    status,
+  };
+}
+
 export {
   fetchShoesPending,
   fetchShoesSuccess,
@@ -115,4 +122,5 @@ export {
   userIsLoggedIn,
   userIsLoggedOut,
   getFavouriteShoes,
+  getFavouriteShoesSuccess,
 };

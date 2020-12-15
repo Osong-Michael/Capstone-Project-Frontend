@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { getFavouriteShoes, fetchShoesPending, fetchShoesError } from './index';
+import {
+  getFavouriteShoes,
+  fetchShoesPending,
+  fetchShoesError,
+  getFavouriteShoesSuccess,
+} from './index';
 
 function getFavourites() {
   return dispatch => {
@@ -16,9 +21,13 @@ function getFavourites() {
 }
 
 function createFav(shoeId, userId) {
+  console.log('API content', shoeId, userId);
   return dispatch => {
     axios.post(`http://localhost:3001/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
-      .then(res => res.data)
+      .then(res => {
+        console.log('After Fetch', res);
+        dispatch(getFavouriteShoesSuccess(res.data));
+      })
       .catch(error => {
         dispatch(fetchShoesError(error));
       });
