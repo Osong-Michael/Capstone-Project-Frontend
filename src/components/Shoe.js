@@ -34,10 +34,8 @@ class Shoe extends Component {
       createFav,
       user,
       shoe,
-      history,
     } = this.props;
     createFav(shoe.id, user.id);
-    history.push('/favourites');
   }
 
   handleClick(e) {
@@ -66,12 +64,10 @@ class Shoe extends Component {
       shoeIds.push(shoes[id]);
     });
 
-    if (shoeIds.length > 0) {
-      if (shoeIds.includes(shoe.id)) {
-        btn = <button type="button" onClick={this.handleClick} value="favorite">Unlike</button>;
-      } else {
-        btn = <button type="button" onClick={this.handleClick} value="not-favorite">Like</button>;
-      }
+    if (shoeIds.includes(shoe.id)) {
+      btn = <button type="button" onClick={this.handleClick} value="favorite">Unlike</button>;
+    } else {
+      btn = <button type="button" onClick={this.handleClick} value="not-favorite">Like</button>;
     }
 
     return (
