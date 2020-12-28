@@ -9,7 +9,7 @@ import {
 function getFavourites() {
   return dispatch => {
     dispatch(fetchShoesPending());
-    axios.get('http://localhost:3001/favourites/all', { withCredentials: true })
+    axios.get('https://cors-anywhere.herokuapp.com/https://vast-earth-24958.herokuapp.com/favourites/all', { withCredentials: true })
       .then(res => {
         dispatch(getFavouriteShoes(res.data));
         return res.data;
@@ -22,7 +22,7 @@ function getFavourites() {
 
 function createFav(shoeId, userId) {
   return dispatch => {
-    axios.post(`http://localhost:3001/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
+    axios.post(`https://cors-anywhere.herokuapp.com/https://vast-earth-24958.herokuapp.com/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
       .then(res => {
         dispatch(getFavouriteShoesSuccess(res.data));
       })
