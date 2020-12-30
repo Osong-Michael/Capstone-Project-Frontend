@@ -9,7 +9,7 @@ import {
 function getFavourites() {
   return dispatch => {
     dispatch(fetchShoesPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/all', { withCredentials: true })
+    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/all', { withCredentials: false })
       .then(res => {
         dispatch(getFavouriteShoes(res.data));
         return res.data;
@@ -22,7 +22,7 @@ function getFavourites() {
 
 function createFav(shoeId, userId) {
   return dispatch => {
-    axios.post(`https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
+    axios.post(`https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/new/{${shoeId},${userId}}`, { withCredentials: false })
       .then(res => {
         dispatch(getFavouriteShoesSuccess(res.data));
       })
