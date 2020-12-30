@@ -14,15 +14,14 @@ import {
 function signUpUser(credentials) {
   return dispatch => {
     dispatch(signingUp());
-    axios.post('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/registrations', {
+    axios.post('https://rocky-reaches-49310.herokuapp.com/registrations', {
       user: {
         username: credentials.username,
         password: credentials.password,
         password_confirmation: credentials.password_confirmation,
       },
     },
-    { withCredentials: true },
-    { 'Content-Type': 'application/json' })
+    { withCredentials: true })
       .then(res => {
         dispatch(signUpSuccess(res.data));
         return res.data;
@@ -36,14 +35,13 @@ function signUpUser(credentials) {
 function logInUser(credentials) {
   return dispatch => {
     dispatch(loggingIn());
-    axios.post('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/sessions', {
+    axios.post('https://rocky-reaches-49310.herokuapp.com/sessions', {
       user: {
         username: credentials.username,
         password: credentials.password,
       },
     },
-    { withCredentials: true },
-    { 'Content-Type': 'application/json' })
+    { withCredentials: true })
       .then(res => {
         if (res.data.status !== 'created') {
           dispatch(logInError(res.data));
@@ -62,7 +60,7 @@ function logInUser(credentials) {
 function checkStatus() {
   return dispatch => {
     dispatch(userIsLoggedInPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logged_in', { withCredentials: true }, { 'Content-Type': 'application/json' })
+    axios.get('https://rocky-reaches-49310.herokuapp.com/logged_in', { withCredentials: true })
       .then(res => {
         dispatch(userIsLoggedIn(res.data));
         return res.data;
