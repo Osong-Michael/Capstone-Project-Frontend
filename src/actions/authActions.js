@@ -20,8 +20,7 @@ function signUpUser(credentials) {
         password: credentials.password,
         password_confirmation: credentials.password_confirmation,
       },
-    },
-    { withCredentials: true })
+    })
       .then(res => {
         dispatch(signUpSuccess(res.data));
         return res.data;
@@ -40,8 +39,7 @@ function logInUser(credentials) {
         username: credentials.username,
         password: credentials.password,
       },
-    },
-    { withCredentials: true })
+    })
       .then(res => {
         if (res.data.status !== 'created') {
           dispatch(logInError(res.data));
@@ -60,7 +58,7 @@ function logInUser(credentials) {
 function checkStatus() {
   return dispatch => {
     dispatch(userIsLoggedInPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logged_in', { withCredentials: true })
+    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logged_in')
       .then(res => {
         dispatch(userIsLoggedIn(res.data));
         return res.data;
@@ -73,7 +71,7 @@ function checkStatus() {
 
 function logUserOut() {
   return dispatch => {
-    axios.delete('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logout', { withCredentials: true })
+    axios.delete('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logout')
       .then(res => {
         dispatch(userIsLoggedOut(res.data));
         return res.data;
