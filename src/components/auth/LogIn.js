@@ -49,7 +49,7 @@ class Login extends Component {
   render() {
     const { username, password } = this.state;
     const { userStatus, loading } = this.props;
-    if (userStatus) return <Redirect to="/" />;
+    if (userStatus !== '') return <Redirect to="/" />;
     return (
       <>
         {loading && (
@@ -86,7 +86,7 @@ class Login extends Component {
 Login.propTypes = {
   logInUser: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  userStatus: PropTypes.bool.isRequired,
+  userStatus: PropTypes.string.isRequired,
   checkStatus: PropTypes.func.isRequired,
 };
 

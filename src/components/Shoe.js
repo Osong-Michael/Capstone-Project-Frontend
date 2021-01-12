@@ -1,3 +1,6 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable prefer-destructuring */
@@ -10,8 +13,9 @@ import PropTypes from 'prop-types';
 import { fetchShoe } from '../actions/shoesAction';
 import { getOneShoe, getShoesPending } from '../reducers/shoesReducer';
 import { checkStatus } from '../actions/authActions';
-import { getStatus, getUser, getFavShoes } from '../reducers/authReducer';
-import { createFav } from '../actions/favouritesAction';
+import { getStatus } from '../reducers/authReducer';
+import { getFavShoes } from '../reducers/favouritesReducer';
+import getFavourites, { createFav } from '../actions/favouritesAction';
 import '../assets/css/shoe.css';
 import Ctn from '../assets/css/Container.module.css';
 
@@ -23,19 +27,19 @@ class Shoe extends Component {
   }
 
   componentDidMount() {
-    const { fetchShoe, checkStatus } = this.props;
+    const { fetchShoe, checkStatus, getFavourites } = this.props;
     const id = this.props.match.params.id;
     fetchShoe(id);
     checkStatus();
+    getFavourites();
   }
 
   createLike() {
     const {
       createFav,
-      user,
       shoe,
     } = this.props;
-    createFav(shoe.id, user.id);
+    createFav(shoe.id);
   }
 
   handleClick(e) {
@@ -49,6 +53,14 @@ class Shoe extends Component {
     this.createLike();
   }
 
+  isEmpty(obj) {
+    for (let key in obj) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  }
+
   render() {
     const {
       shoe,
@@ -56,13 +68,15 @@ class Shoe extends Component {
       userFavourites,
       loading,
     } = this.props;
-    if (!userStatus) return <Redirect to="/login" />;
+    if (userStatus === '') return <Redirect to="/login" />;
     let btn;
     const shoeIds = [];
-    userFavourites.forEach(shoes => {
-      const id = 'id';
-      shoeIds.push(shoes[id]);
-    });
+    if (!this.isEmpty(userFavourites)) {
+      userFavourites.user_shoes.forEach(shoes => {
+        const id = 'id';
+        shoeIds.push(shoes[id]);
+      });
+    }
 
     if (shoeIds.includes(shoe.id)) {
       btn = <button type="button" onClick={this.handleClick} value="favorite">Unlike</button>;
@@ -103,20 +117,17 @@ Shoe.propTypes = {
     id: PropTypes.number,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
-  userStatus: PropTypes.bool.isRequired,
+  userStatus: PropTypes.string.isRequired,
   checkStatus: PropTypes.func.isRequired,
-  userFavourites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  userFavourites: PropTypes.objectOf(PropTypes.array).isRequired,
   createFav: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number,
-  }).isRequired,
 };
 
 const mapStateToProps = state => ({
   shoe: getOneShoe(state),
   userStatus: getStatus(state),
   loading: getShoesPending(state),
-  user: getUser(state),
+  // user: getUser(state),
   userFavourites: getFavShoes(state),
 });
 
@@ -124,6 +135,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchShoe,
   checkStatus,
   createFav,
+  getFavourites,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shoe);

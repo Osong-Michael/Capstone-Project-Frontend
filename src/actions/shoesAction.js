@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from 'axios';
 import {
   fetchShoesPending,
   fetchShoesSuccess,
@@ -7,33 +7,26 @@ import {
   fetchOneShoeSuccess,
   fetchOneShoeError,
 } from './index';
+import { authHeader } from './authActions';
 
-function fetchShoes() {
-  return dispatch => {
+const API_URL = 'http://localhost:3001/';
+
+export const fetchShoes = () => async dispatch => {
+  try {
     dispatch(fetchShoesPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/shoes')
-      .then(res => {
-        dispatch(fetchShoesSuccess(res.data));
-        return res.data;
-      })
-      .catch(error => {
-        dispatch(fetchShoesError(error));
-      });
-  };
-}
+    const response = await Axios.get(`${API_URL}shoes`, { headers: authHeader() });
+    dispatch(fetchShoesSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchShoesError(error));
+  }
+};
 
-function fetchShoe(id) {
-  return dispatch => {
+export const fetchShoe = id => async dispatch => {
+  try {
     dispatch(fetchOneShoePending());
-    axios.get(`https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/shoes/${id}`)
-      .then(res => {
-        dispatch(fetchOneShoeSuccess(res.data));
-        return res.data;
-      })
-      .catch(error => {
-        dispatch(fetchOneShoeError(error));
-      });
-  };
-}
-export { fetchShoe };
-export default fetchShoes;
+    const response = await Axios.get(`${API_URL}shoes/${id}`, { headers: authHeader() });
+    dispatch(fetchOneShoeSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchOneShoeError(error));
+  }
+};

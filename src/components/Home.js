@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners';
 import Ctn from '../assets/css/Container.module.css';
 import { getShoes, getShoesPending } from '../reducers/shoesReducer';
 import { getStatus } from '../reducers/authReducer';
-import fetchShoes from '../actions/shoesAction';
+import { fetchShoes } from '../actions/shoesAction';
 import { checkStatus } from '../actions/authActions';
 import ShoeList from './ShoeList';
 
@@ -19,10 +19,13 @@ class Home extends Component {
   }
 
   render() {
-    const { shoes, userStatus, loading } = this.props;
+    const {
+      shoes,
+      userStatus,
+      loading,
+    } = this.props;
     const shoe = shoes.map(shoe => (<ShoeList shoe={shoe} key={Math.random()} />));
-
-    if (!userStatus) return <Redirect to="/login" />;
+    if (userStatus === '') return <Redirect to="/login" />;
     return (
       <>
         {loading && (
@@ -45,7 +48,7 @@ Home.propTypes = {
   fetchShoes: PropTypes.func.isRequired,
   shoes: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
-  userStatus: PropTypes.bool.isRequired,
+  userStatus: PropTypes.string.isRequired,
   checkStatus: PropTypes.func.isRequired,
 };
 

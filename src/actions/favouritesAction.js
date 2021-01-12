@@ -1,15 +1,18 @@
-import axios from 'axios';
+import Axios from 'axios';
 import {
   getFavouriteShoes,
   fetchShoesPending,
   fetchShoesError,
   getFavouriteShoesSuccess,
 } from './index';
+import { authHeader } from './authActions';
+
+const API_URL = 'http://localhost:3001/';
 
 function getFavourites() {
   return dispatch => {
     dispatch(fetchShoesPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/all', { withCredentials: true })
+    Axios.get(`${API_URL}favourites/all`, { headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoes(res.data));
         return res.data;
@@ -20,9 +23,9 @@ function getFavourites() {
   };
 }
 
-function createFav(shoeId, userId) {
+function createFav(shoeId) {
   return dispatch => {
-    axios.post(`https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/favourites/new/{${shoeId},${userId}}`, { withCredentials: true })
+    fetch(`${API_URL}favourites/new/${shoeId}`, { method: 'POST', headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoesSuccess(res.data));
       })

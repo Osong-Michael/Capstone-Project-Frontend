@@ -19,6 +19,7 @@ const Navbar = props => {
   const logOutUser = () => {
     const { logUserOut } = props;
     logUserOut();
+    window.location.reload();
   };
   const signedOutLinks = (
     <>
@@ -74,7 +75,7 @@ const Navbar = props => {
 
 Navbar.propTypes = {
   logUserOut: PropTypes.func.isRequired,
-  userStatus: PropTypes.bool.isRequired,
+  userStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

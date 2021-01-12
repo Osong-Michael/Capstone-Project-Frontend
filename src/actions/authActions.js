@@ -6,24 +6,28 @@ import {
   loggingIn,
   logInSuccess,
   logInError,
-  userIsLoggedIn,
   userIsLoggedOut,
-  userIsLoggedInPending,
+  userIsLoggedInFalse,
+  userIsLoggedIn,
 } from './index';
 
+const API_URL = 'http://localhost:3001/';
+
 function signUpUser(credentials) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(signingUp());
-    axios.post('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/registrations', {
-      user: {
+    await axios.post(`${API_URL}users`,
+      {
         username: credentials.username,
         password: credentials.password,
         password_confirmation: credentials.password_confirmation,
-      },
-    },
-    { withCredentials: true })
+      })
       .then(res => {
         dispatch(signUpSuccess(res.data));
+        if (res.data.jwt) {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          window.location.reload();
+        }
         return res.data;
       })
       .catch(error => {
@@ -33,21 +37,18 @@ function signUpUser(credentials) {
 }
 
 function logInUser(credentials) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(loggingIn());
-    axios.post('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/sessions', {
-      user: {
+    await axios.post(`${API_URL}login`,
+      {
         username: credentials.username,
         password: credentials.password,
-      },
-    },
-    { withCredentials: true })
+      })
       .then(res => {
-        if (res.data.status !== 'created') {
-          dispatch(logInError(res.data));
-        }
-        if (res.data.status === 'created') {
-          dispatch(logInSuccess(res.data));
+        dispatch(logInSuccess(res.data));
+        if (res.data.jwt) {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          window.location.reload();
         }
         return res.data;
       })
@@ -57,32 +58,41 @@ function logInUser(credentials) {
   };
 }
 
-function checkStatus() {
+const checkStatus = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
   return dispatch => {
-    dispatch(userIsLoggedInPending());
-    axios.get('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logged_in', { withCredentials: true })
-      .then(res => {
-        dispatch(userIsLoggedIn(res.data));
-        return res.data;
-      })
-      .catch(error => {
-        dispatch(logInError(error));
-      });
+    if (user !== null) {
+      dispatch(userIsLoggedIn(user));
+      return user;
+    }
+    dispatch(userIsLoggedInFalse());
+    return {
+      type: 'USER_NOT_LOGGED_IN',
+      loggedIn: false,
+    };
   };
-}
+};
 
 function logUserOut() {
+  localStorage.removeItem('user');
   return dispatch => {
-    axios.delete('https://cors-anywhere.herokuapp.com/https://rocky-reaches-49310.herokuapp.com/logout', { withCredentials: true })
-      .then(res => {
-        dispatch(userIsLoggedOut(res.data));
-        return res.data;
-      })
-      .catch(error => {
-        dispatch(logInError(error));
-      });
+    dispatch(userIsLoggedOut('Logged Out'));
   };
 }
 
-export { logInUser, checkStatus, logUserOut };
+function authHeader() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user && user.jwt) {
+    return { Authorization: `Bearer ${user.jwt}` };
+  }
+  return {};
+}
+
+export {
+  logInUser,
+  checkStatus,
+  logUserOut,
+  authHeader,
+};
 export default signUpUser;

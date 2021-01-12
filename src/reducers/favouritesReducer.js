@@ -1,5 +1,5 @@
 const initState = {
-  shoes: {},
+  shoes: [],
   status: '',
   loading: false,
   error: null,
@@ -34,5 +34,7 @@ const favouriteReducer = (state = initState, action) => {
       return state;
   }
 };
+
+export const getFavShoes = state => state.fav.shoes;
 
 export default favouriteReducer;
