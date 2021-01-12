@@ -118,8 +118,10 @@ Shoe.propTypes = {
   }).isRequired,
   loading: PropTypes.bool.isRequired,
   userStatus: PropTypes.string.isRequired,
+  userFavourites: PropTypes.shape({
+    user_shoe: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
   checkStatus: PropTypes.func.isRequired,
-  userFavourites: PropTypes.objectOf(PropTypes.array).isRequired,
   createFav: PropTypes.func.isRequired,
 };
 
@@ -127,7 +129,6 @@ const mapStateToProps = state => ({
   shoe: getOneShoe(state),
   userStatus: getStatus(state),
   loading: getShoesPending(state),
-  // user: getUser(state),
   userFavourites: getFavShoes(state),
 });
 
