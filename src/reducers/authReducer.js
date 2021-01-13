@@ -18,7 +18,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         loading: false,
         user: action.user,
-        loggedIn: action.user.logged_in,
+        jwt: action.user.jwt,
       };
     case 'SIGNED_UP_FAILURE':
       return {
@@ -36,7 +36,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         loading: false,
         user: action.user,
-        loggedIn: action.user.logged_in,
+        jwt: action.user.jwt,
       };
     case 'LOGGING_IN_FAILURE':
       return {
