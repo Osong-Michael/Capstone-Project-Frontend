@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import signUpUser, { checkStatus } from '../../actions/authActions';
 import Ctn from '../../assets/css/Container.module.css';
-import { getStatus, getLoading } from '../../reducers/authReducer';
+import { getStatus, getLoading, getError } from '../../reducers/authReducer';
 
 class SignUp extends Component {
   constructor(props) {
@@ -51,7 +51,8 @@ class SignUp extends Component {
 
   render() {
     const { username, password, password_confirmation } = this.state;
-    const { userStatus, loading } = this.props;
+    const { userStatus, loading, error } = this.props;
+    console.log('Error', error);
     if (userStatus !== '') return <Redirect to="/" />;
     return (
       <>
@@ -59,6 +60,11 @@ class SignUp extends Component {
           <div className={Ctn.loading}>
             <RingLoader loading={loading} />
           </div>
+        )}
+        {error && (
+        <div className={Ctn.error}>
+          <p>Please check credentials or change Username</p>
+        </div>
         )}
         <div>
           <p className={Ctn.txt}>Welcome to the One stop for all your Favourite Jordan Sneakers</p>
@@ -95,6 +101,7 @@ class SignUp extends Component {
 SignUp.propTypes = {
   signUpUser: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
   userStatus: PropTypes.string.isRequired,
   checkStatus: PropTypes.func.isRequired,
 };
@@ -102,6 +109,7 @@ SignUp.propTypes = {
 const mapStateToProps = state => ({
   userStatus: getStatus(state),
   loading: getLoading(state),
+  error: getError(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

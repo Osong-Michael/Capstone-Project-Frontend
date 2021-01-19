@@ -11,7 +11,7 @@ import {
   userIsLoggedIn,
 } from './index';
 
-const API_URL = 'https://dem-shoes.herokuapp.com/';
+const API_URL = 'http://localhost:3001/';
 
 function signUpUser(credentials) {
   return async dispatch => {
@@ -23,10 +23,14 @@ function signUpUser(credentials) {
         password_confirmation: credentials.password_confirmation,
       })
       .then(res => {
-        dispatch(signUpSuccess(res.data));
-        if (res.data.jwt) {
+        if (res.data.jwt === undefined) {
+          dispatch(signUpError(res.data.errors));
+        } else {
+          dispatch(signUpSuccess(res.data));
           localStorage.setItem('user', JSON.stringify(res.data));
         }
+        // if (res.data.jwt) {
+        // }
         return res.data;
       })
       .catch(error => {
@@ -44,10 +48,16 @@ function logInUser(credentials) {
         password: credentials.password,
       })
       .then(res => {
-        dispatch(logInSuccess(res.data));
-        if (res.data.jwt) {
+        console.log('Res', res);
+        if (res.data.jwt === undefined) {
+          dispatch(logInError(res.data.failure));
+        } else {
+          dispatch(logInSuccess(res.data));
           localStorage.setItem('user', JSON.stringify(res.data));
         }
+        // if (res.data.jwt) {
+        //   localStorage.setItem('user', JSON.stringify(res.data));
+        // }
         return res.data;
       })
       .catch(error => {

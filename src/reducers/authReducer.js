@@ -7,6 +7,7 @@ const initState = {
 };
 
 const authReducer = (state = initState, action) => {
+  console.log('AUTH CHECK', action);
   switch (action.type) {
     case 'SIGNING_UP':
       return {
@@ -69,5 +70,6 @@ const authReducer = (state = initState, action) => {
 export const getStatus = state => state.auth.jwt;
 export const getUser = state => state.auth.user;
 export const getLoading = state => state.auth.loading;
+export const getError = state => state.auth.error;
 
 export default authReducer;
