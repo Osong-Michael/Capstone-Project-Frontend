@@ -51,6 +51,7 @@ class Shoe extends Component {
       e.target.textContent = 'Unlike';
     }
     this.createLike();
+    // window.location.reload();
   }
 
   isEmpty(obj) {

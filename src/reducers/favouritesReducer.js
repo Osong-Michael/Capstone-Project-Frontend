@@ -1,6 +1,6 @@
 const initState = {
   shoes: [],
-  status: '',
+  status: null,
   loading: false,
   error: null,
 };
@@ -17,6 +17,7 @@ const favouriteReducer = (state = initState, action) => {
         ...state,
         loading: false,
         shoes: action.shoes,
+        status: action.status,
       };
     case 'FETCHING_SHOES_FAILED':
       return {
@@ -28,7 +29,7 @@ const favouriteReducer = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        status: action.status,
+        status: action.status.status,
       };
     default:
       return state;
@@ -36,5 +37,6 @@ const favouriteReducer = (state = initState, action) => {
 };
 
 export const getFavShoes = state => state.fav.shoes;
+export const getFavStatus = state => state.fav.status;
 
 export default favouriteReducer;

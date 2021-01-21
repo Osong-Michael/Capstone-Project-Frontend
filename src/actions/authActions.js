@@ -29,8 +29,6 @@ function signUpUser(credentials) {
           dispatch(signUpSuccess(res.data));
           localStorage.setItem('user', JSON.stringify(res.data));
         }
-        // if (res.data.jwt) {
-        // }
         return res.data;
       })
       .catch(error => {
@@ -48,16 +46,12 @@ function logInUser(credentials) {
         password: credentials.password,
       })
       .then(res => {
-        console.log('Res', res);
         if (res.data.jwt === undefined) {
           dispatch(logInError(res.data.failure));
         } else {
           dispatch(logInSuccess(res.data));
           localStorage.setItem('user', JSON.stringify(res.data));
         }
-        // if (res.data.jwt) {
-        //   localStorage.setItem('user', JSON.stringify(res.data));
-        // }
         return res.data;
       })
       .catch(error => {

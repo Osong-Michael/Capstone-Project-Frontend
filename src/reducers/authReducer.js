@@ -7,7 +7,6 @@ const initState = {
 };
 
 const authReducer = (state = initState, action) => {
-  console.log('AUTH CHECK', action);
   switch (action.type) {
     case 'SIGNING_UP':
       return {

@@ -52,7 +52,6 @@ class SignUp extends Component {
   render() {
     const { username, password, password_confirmation } = this.state;
     const { userStatus, loading, error } = this.props;
-    console.log('Error', error);
     if (userStatus !== '') return <Redirect to="/" />;
     return (
       <>

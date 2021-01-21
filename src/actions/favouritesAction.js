@@ -12,7 +12,7 @@ const API_URL = 'http://localhost:3001/';
 function getFavourites() {
   return dispatch => {
     dispatch(fetchShoesPending());
-    Axios.get(`${API_URL}favourites/all`, { headers: authHeader() })
+    Axios.get(`${API_URL}favs`, { headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoes(res.data));
         return res.data;
@@ -25,7 +25,7 @@ function getFavourites() {
 
 function createFav(shoeId) {
   return dispatch => {
-    fetch(`${API_URL}favourites/new/${shoeId}`, { method: 'POST', headers: authHeader() })
+    Axios.post(`${API_URL}favs`, { shoe_id: shoeId }, { headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoesSuccess(res.data));
       })
