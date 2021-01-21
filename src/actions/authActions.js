@@ -11,7 +11,7 @@ import {
   userIsLoggedIn,
 } from './index';
 
-const API_URL = 'http://localhost:3001/';
+const API_URL = 'https://dem-shoes.herokuapp.com/';
 
 function signUpUser(credentials) {
   return async dispatch => {

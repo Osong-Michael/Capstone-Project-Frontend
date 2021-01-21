@@ -7,7 +7,7 @@ import {
 } from './index';
 import { authHeader } from './authActions';
 
-const API_URL = 'http://localhost:3001/';
+const API_URL = 'https://dem-shoes.herokuapp.com/';
 
 function getFavourites() {
   return dispatch => {
