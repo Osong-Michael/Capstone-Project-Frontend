@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   signingUp,
   signUpSuccess,
@@ -10,13 +9,12 @@ import {
   userIsLoggedInFalse,
   userIsLoggedIn,
 } from './index';
-
-const API_URL = 'https://dem-shoes.herokuapp.com/';
+import API from './api';
 
 function signUpUser(credentials) {
   return async dispatch => {
     dispatch(signingUp());
-    await axios.post(`${API_URL}users`,
+    await API.post('users',
       {
         username: credentials.username,
         password: credentials.password,
@@ -40,7 +38,7 @@ function signUpUser(credentials) {
 function logInUser(credentials) {
   return async dispatch => {
     dispatch(loggingIn());
-    await axios.post(`${API_URL}login`,
+    await API.post('login',
       {
         username: credentials.username,
         password: credentials.password,

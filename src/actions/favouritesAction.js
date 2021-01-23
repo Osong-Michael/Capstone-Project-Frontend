@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import {
   getFavouriteShoes,
   fetchShoesPending,
@@ -6,13 +5,12 @@ import {
   getFavouriteShoesSuccess,
 } from './index';
 import { authHeader } from './authActions';
-
-const API_URL = 'https://dem-shoes.herokuapp.com/';
+import API from './api';
 
 function getFavourites() {
   return dispatch => {
     dispatch(fetchShoesPending());
-    Axios.get(`${API_URL}favs`, { headers: authHeader() })
+    API.get('favs', { headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoes(res.data));
         return res.data;
@@ -25,7 +23,7 @@ function getFavourites() {
 
 function createFav(shoeId) {
   return dispatch => {
-    Axios.post(`${API_URL}favs`, { shoe_id: shoeId }, { headers: authHeader() })
+    API.post('favs', { shoe_id: shoeId }, { headers: authHeader() })
       .then(res => {
         dispatch(getFavouriteShoesSuccess(res.data));
       })

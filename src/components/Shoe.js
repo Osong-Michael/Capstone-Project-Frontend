@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { RingLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { fetchShoe } from '../actions/shoesAction';
@@ -42,16 +42,9 @@ class Shoe extends Component {
     createFav(shoe.id);
   }
 
-  handleClick(e) {
-    if (e.target.value === 'favourite') {
-      e.target.value = 'not-favourite';
-      e.target.textContent = 'Like';
-    } else {
-      e.target.value = 'favourite';
-      e.target.textContent = 'Unlike';
-    }
+  handleClick() {
     this.createLike();
-    // window.location.reload();
+    window.location.reload(false);
   }
 
   isEmpty(obj) {
@@ -80,7 +73,7 @@ class Shoe extends Component {
     }
 
     if (shoeIds.includes(shoe.id)) {
-      btn = <button type="button" onClick={this.handleClick} value="favorite">Unlike</button>;
+      btn = <button type="button" value="favorite" disable id="btn-disabled">Part of Collection</button>;
     } else {
       btn = <button type="button" onClick={this.handleClick} value="not-favorite">Like</button>;
     }
@@ -103,7 +96,6 @@ class Shoe extends Component {
           </div>
           <p className="shoe-details">{shoe.description}</p>
           <div className="btns-below">
-            <p><Link to="/">Back</Link></p>
             <p>{btn}</p>
           </div>
         </div>

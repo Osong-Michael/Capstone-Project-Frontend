@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import {
   fetchShoesPending,
   fetchShoesSuccess,
@@ -8,13 +7,12 @@ import {
   fetchOneShoeError,
 } from './index';
 import { authHeader } from './authActions';
-
-const API_URL = 'https://dem-shoes.herokuapp.com/';
+import API from './api';
 
 export const fetchShoes = () => async dispatch => {
   try {
     dispatch(fetchShoesPending());
-    const response = await Axios.get(`${API_URL}shoes`, { headers: authHeader() });
+    const response = await API.get('shoes', { headers: authHeader() });
     dispatch(fetchShoesSuccess(response.data));
   } catch (error) {
     dispatch(fetchShoesError(error));
@@ -24,7 +22,7 @@ export const fetchShoes = () => async dispatch => {
 export const fetchShoe = id => async dispatch => {
   try {
     dispatch(fetchOneShoePending());
-    const response = await Axios.get(`${API_URL}shoes/${id}`, { headers: authHeader() });
+    const response = await API.get(`shoes/${id}`, { headers: authHeader() });
     dispatch(fetchOneShoeSuccess(response.data));
   } catch (error) {
     dispatch(fetchOneShoeError(error));
