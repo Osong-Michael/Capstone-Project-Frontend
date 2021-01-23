@@ -6,7 +6,7 @@ A simple catalogue for your best Jordan Sneakers.
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4753087a-80db-492c-94e2-297ff56da1f9/deploy-status)](https://app.netlify.com/sites/oa7-dem-shoes/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3613c1c7-7dec-489a-8fbe-f0001c1785e8/deploy-status)](https://app.netlify.com/sites/oa7-dem-shoes/deploys)
 
 <!-- PROJECT LOGO -->
 <br />
