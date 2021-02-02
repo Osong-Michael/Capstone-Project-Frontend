@@ -1,23 +1,23 @@
 const initState = {
-  shoes: [],
+  shoe: {},
   loading: false,
   error: null,
 };
 
 const shoesReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'FETCHING_SHOES':
+    case 'FETCHING_ONE_SHOE':
       return {
         ...state,
         loading: true,
       };
-    case 'FETCHED_SHOES':
+    case 'FETCHED_ONE_SHOE':
       return {
         ...state,
         loading: false,
-        shoes: action.shoes,
+        shoe: action.shoe,
       };
-    case 'FETCHING_SHOES_FAILED':
+    case 'FETCHING_ONE_SHOE_FAILED':
       return {
         ...state,
         loading: false,
@@ -28,7 +28,7 @@ const shoesReducer = (state = initState, action) => {
   }
 };
 
-export const getShoes = state => state.shoes.shoes;
-export const getShoesPending = state => state.shoes.loading;
+export const getOneShoe = state => state.shoe.shoe;
+export const getShoePending = state => state.shoe.loading;
 
 export default shoesReducer;

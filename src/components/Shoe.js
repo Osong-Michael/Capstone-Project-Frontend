@@ -11,7 +11,7 @@ import { Redirect } from 'react-router-dom';
 import { RingLoader } from 'react-spinners';
 import PropTypes from 'prop-types';
 import { fetchShoe } from '../actions/shoesAction';
-import { getOneShoe, getShoesPending } from '../reducers/shoesReducer';
+import { getOneShoe, getShoePending } from '../reducers/shoeReducer';
 import { checkStatus } from '../actions/authActions';
 import { getStatus } from '../reducers/authReducer';
 import { getFavShoes } from '../reducers/favouritesReducer';
@@ -121,7 +121,7 @@ Shoe.propTypes = {
 const mapStateToProps = state => ({
   shoe: getOneShoe(state),
   userStatus: getStatus(state),
-  loading: getShoesPending(state),
+  loading: getShoePending(state),
   userFavourites: getFavShoes(state),
 });
 
